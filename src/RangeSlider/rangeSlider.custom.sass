@@ -1,0 +1,28 @@
+.range-slider
+  &--custom
+    height: 4px
+    cursor: pointer
+    background-color: rgba(255, 255, 255, .5)
+    border-radius: 0
+    // https://github.com/whoisandy/react-rangeslider default className
+    .rangeslider
+      &__handle
+        width: 15px
+        height: 15px
+        background-color: #fff
+        top: -7px
+        box-shadow: -1px 0 6px rgba(0, 0, 0, 0.27)
+        &::after
+          display: none
+      &__label
+        color: #ffffff
+        font-family: "PF Din Display Pro"
+        font-size: 18px
+        font-weight: 400
+        cursor: text
+      &__label[data-value="min"]
+        left: 0
+      &__label[data-value="max"]
+        right: 0
+      &__fill
+        background-color: transparent
