@@ -7,6 +7,7 @@ import * as fonts from '../styles/fonts';
 import DropDown from '../Common/Input/DropDown';
 import Input from '../Common/Input/Input';
 import DoubleRadio from '../Common/Input/DoubleRadio';
+import DateInput from '../Common/Input/DateInput';
 
 const SimpleForm = props => {
   const {handleSubmit, pristine, reset, submitting} = props;
@@ -33,7 +34,8 @@ const SimpleForm = props => {
       </div>
       <div className={css(styles.formRow)}>
         <label className={css(styles.label)}>Дата рождения</label>
-        <Field component={Input}
+        <Field component={DateInput}
+               icon={require('../assets/img/icon-calendar.png')}
                name='date' />
       </div>
       <div className={css(styles.formRow)}>

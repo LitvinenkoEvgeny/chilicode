@@ -9,27 +9,37 @@ class DoubleRadio extends Component {
     super(...arguments);
 
     this.state = {
-      checked: '',
+      checked: 'Муж',
     };
 
     this.handleCheckBoxClick = this.handleCheckBoxClick.bind(this);
   }
 
+  componentDidMount() {
+    this.props.input.onChange(this.state.checked);
+  }
+
+
+  componentWillUpdate(nextProps, nextState, nextContext) {
+    this.props.input.onChange(nextState.checked);
+  }
+
+
   handleCheckBoxClick(value) {
     this.setState({...this.state, checked: value});
-    this.props.input.value = this.state.value;
   }
 
   render() {
     return (
-      <div>
+      <div {...this.props.input}>
         <input type="radio" value={this.props.values.first} className={css(styles.hidden)}/>
         <input type="radio" value={this.props.values.second} className={css(styles.hidden)}/>
 
         <div className={css(styles.doubleRadio)}>
 
-          <div className={css(styles.radioItem,
-            this.state.checked === this.props.values.first && styles.radioItemChecked)}
+          <div
+               className={css(styles.radioItem,
+                 this.state.checked === this.props.values.first && styles.radioItemChecked)}
                onClick={() => this.handleCheckBoxClick(this.props.values.first)}>
 
             <img src={require('../../assets/img/tick.png')}
@@ -42,9 +52,10 @@ class DoubleRadio extends Component {
 
           </div>
 
-          <div className={css(styles.radioItem,
-            this.state.checked === this.props.values.second && styles.radioItemChecked)}
-               onClick={() => this.handleCheckBoxClick(this.props.values.second)}>
+          <div
+                className={css(styles.radioItem,
+                  this.state.checked === this.props.values.second && styles.radioItemChecked)}
+                onClick={() => this.handleCheckBoxClick(this.props.values.second)}>
 
             <span >
               {this.props.values.second}

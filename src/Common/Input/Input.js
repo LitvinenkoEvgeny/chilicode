@@ -1,16 +1,31 @@
-import React from 'react';
+import React, {Component} from 'react';
 import {css, StyleSheet} from 'aphrodite';
 import PropTypes from 'prop-types';
 
-function Input(props) {
-  return (
-    <div>
+import VMasker from 'vanilla-masker';
+
+
+class Input extends Component {
+  componentDidMount() {
+    if(this.props.mask){
+      VMasker(this.input).maskPattern(this.props.mask);
+    }
+  }
+
+  render() {
+    return (
       <input type="text"
-             {...props.input}
+             ref={input => this.input}
+             {...this.props.input}
              className={css(styles.input)}/>
-    </div>
-  );
+    );
+  }
 }
+
+Input.propTypes = {
+  mask: PropTypes.string,
+};
+
 const styles = StyleSheet.create({
   input: {
     width: 307,
