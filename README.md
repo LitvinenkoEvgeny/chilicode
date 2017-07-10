@@ -14,5 +14,6 @@ npm run dev
 - адаптивность
 - image compression
 - js minification
-- подгрузка компонентов по мере надобности aka lazy-loading https://webpack.js.org/guides/lazy-loading/
+- подгрузка компонентов по мере надобности aka [lazy-loading](https://webpack.js.org/guides/lazy-loading/)
+- использование [animate.css](https://daneden.github.io/animate.css/)
 
