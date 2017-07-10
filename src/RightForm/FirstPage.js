@@ -8,9 +8,12 @@ import DropDown from '../Common/Input/DropDown';
 import Input from '../Common/Input/Input';
 import DoubleRadio from '../Common/Input/DoubleRadio';
 import DateInput from '../Common/Input/DateInput';
+import Button from '../Common/Button/ButtonComponent';
 
-const SimpleForm = props => {
-  const {handleSubmit, pristine, reset, submitting} = props;
+import * as validateFuncs from './validation-functions';
+
+const FirstForm = props => {
+  const {handleSubmit, pristine, reset, submitting, valid} = props;
   return (
     <form onSubmit={handleSubmit} className={css(styles.form)}>
       <div className={css(styles.formRow)}>
@@ -18,17 +21,19 @@ const SimpleForm = props => {
         <Field component={DropDown}
                label={{text: 'Желаемый срок займа', to: 'top'}}
                name='dropdown'
-               items={['2', '3']}
+               items={['2 месяца', '3 месяца']}
                icon={require('../assets/img/icon-down.png')}/>
       </div>
       <div className={css(styles.formRow)}>
         <label className={css(styles.label)}>ФИО</label>
         <Field component={Input}
+               validate={[validateFuncs.required]}
                name='fullName' />
       </div>
       <div className={css(styles.formRow)}>
         <label className={css(styles.label)}>Пол</label>
         <Field component={DoubleRadio}
+               defaultValue='Жен'
                values={{first: 'Муж', second: 'Жен'}}
                name='sex' />
       </div>
@@ -41,20 +46,25 @@ const SimpleForm = props => {
       <div className={css(styles.formRow)}>
         <label className={css(styles.label)}>Мобильный телефон</label>
         <Field component={Input}
+               mask={'9 (999) 999 99 99'}
+               validate={[validateFuncs.phoneNumber]}
+               placeholder='8 (902) 222 13 20'
                name='phone' />
       </div>
       <div className={css(styles.formRow)}>
         <label className={css(styles.label)}>Адрес электронной почты</label>
         <Field component={Input}
+               validate={[validateFuncs.email]}
+               placeholder="yourawesomemail@gmail.com"
                name='mail' />
       </div>
+      <Button onClick={handleSubmit} active={valid}>Продолжить</Button>
     </form>
   )
 };
 
 const styles = StyleSheet.create({
   form: {
-    width: 641,
     display: 'flex',
     flexDirection: 'column'
   },
@@ -74,6 +84,15 @@ const styles = StyleSheet.create({
   }
 });
 
+const validate = values => {
+  const errors = {};
+
+  return errors;
+};
+
 export default reduxForm({
-  form: 'simple' // a unique identifier for this form
-})(SimpleForm)
+  form: 'simple', // a unique identifier for this form
+  destroyOnUnmount: false, // <------ preserve form data
+  forceUnregisterOnUnmount: true, // <------ unregister fields on unmount
+  validate
+})(FirstForm)

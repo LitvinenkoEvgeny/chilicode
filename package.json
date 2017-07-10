@@ -11,6 +11,7 @@
     "css-loader": "^0.28.4",
     "eslint-loader": "^1.9.0",
     "file-loader": "^0.11.2",
+    "is-phone-number": "^1.0.4",
     "node-sass": "^4.5.3",
     "normalize.css": "^7.0.0",
     "pikaday": "^1.6.1",

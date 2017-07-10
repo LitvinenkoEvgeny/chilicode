@@ -25,6 +25,11 @@ class DropDown extends Component {
     window.addEventListener('click', this.handleWindowClick);
   }
 
+  componentWillUnmount() {
+    window.removeEventListener('click', this.handleWindowClick);
+  }
+
+
   handleWindowClick(e) {
     if (isChildren(e.target, this.wrapper)) return;
     this.setState({open: false});
@@ -37,6 +42,7 @@ class DropDown extends Component {
 
   handleIconClick(e) {
     e.preventDefault();
+    this.setDropDownWidth(this.getInputWidth());
     this.setState({open: !this.state.open})
   }
 
@@ -48,6 +54,7 @@ class DropDown extends Component {
 
   handleDropItemClick(value) {
     this.setState({value: value, open: false});
+    this.props.input.onChange(value);
   }
 
   setDropDownWidth(width) {
@@ -68,9 +75,17 @@ class DropDown extends Component {
       this.state.open && styles.dropItemsShow
     );
 
+    const {
+      input,
+      meta: {touched, error}
+    } = this.props;
+
     return (
       <div>
-        <div className={css(styles.wrapper)} ref={item => this.wrapper = item}>
+        <div className={css(
+          styles.wrapper,
+          touched && error && styles.error
+        )} ref={item => this.wrapper = item}>
           <input {...this.props.input}
                  value={this.state.value}
                  ref={input => this.input = input}
@@ -133,6 +148,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     position: 'relative',
     border: '1px solid #9e9e9e',
+    transition: 'border-color .3s ease-in-out',
   },
   input: {
     width: 307,
@@ -142,6 +158,9 @@ const styles = StyleSheet.create({
     ':focus': {
       outline: 'none'
     }
+  },
+  error: {
+    borderColor: '#f00'
   },
   dropItems: {
     display: 'none',

@@ -28,5 +28,6 @@ export default StyleSheet.create({
   },
   calendarContainer: {
     position: 'absolute',
+    zIndex: 999
   }
 });

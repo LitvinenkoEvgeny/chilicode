@@ -6,6 +6,7 @@ import {Field, reduxForm} from 'redux-form'
 import * as fonts from '../styles/fonts';
 import Input from '../Common/Input/Input';
 import DoubleRadio from '../Common/Input/DoubleRadio';
+import DateInput from '../Common/Input/DateInput';
 import Button from '../Common/Button/ButtonComponent';
 
 import * as validateFuncs from './validation-functions';
@@ -15,40 +16,60 @@ const SecondForm = props => {
   return (
     <form onSubmit={handleSubmit} className={css(styles.form)}>
       <div className={css(styles.formRow)}>
-        <label className={css(styles.label)}>Регион (край,область) проживания</label>
+        <label className={css(styles.label)}>Серия, номер паспорта</label>
         <Field component={Input}
                validate={[validateFuncs.required]}
-               name='region' />
+               name='passportNumber' />
       </div>
 
       <div className={css(styles.formRow)}>
-        <label className={css(styles.label)}>Город проживания</label>
-        <Field component={Input}
-               name='city' />
+        <label className={css(styles.label)}>Дата выдачи</label>
+        <Field component={DateInput}
+               icon={require('../assets/img/icon-calendar.png')}
+               name='passportDate' />
       </div>
       <div className={css(styles.formRow)}>
-        <label className={css(styles.label)}>Улица места проживания</label>
+        <label className={css(styles.label)}>Кем выдан паспорт</label>
         <Field component={Input}
-               name='street' />
+               name='passportWhoGive' />
       </div>
       <div className={css(styles.formRow)}>
-        <label className={css(styles.label)}>Номер дома</label>
-        <Field component={Input}
-               type='text'
-               name='houseNumber' />
-      </div>
-      <div className={css(styles.formRow)}>
-        <label className={css(styles.label)}>Номер квартиры</label>
+        <label className={css(styles.label)}>Код подразделения выдачи паспорта</label>
         <Field component={Input}
                type='text'
-               name='flatNumber' />
+               name='passportCode' />
       </div>
       <div className={css(styles.formRow)}>
-        <label className={css(styles.label)}>Место регистрации совпадает<br/>с местом проживания? </label>
+        <label className={css(styles.label)}>Место рождения</label>
+        <Field component={Input}
+               type='text'
+               name='bithPlace' />
+      </div>
+      <div className={css(styles.formRow)}>
+        <label className={css(styles.label)}>Есть займы в других кредитных<br/>организациях?</label>
         <Field component={DoubleRadio}
                defaultValue="Да"
                values={{first: 'Да', second: 'Нет'}}
-               name='sex' />
+               name='hasCredits' />
+      </div>
+      <div className={css(styles.formRow)}>
+        <label className={css(styles.label)}>Имеются просрочки по платежам?</label>
+        <Field component={DoubleRadio}
+               defaultValue="Нет"
+               values={{first: 'Да', second: 'Нет'}}
+               name='hasFailCredits' />
+      </div>
+      <div className={css(styles.formRow)}>
+        <label className={css(styles.label)}>Общая сумма задолженности</label>
+        <Field component={Input}
+               type='text'
+               name='creditSum' />
+      </div>
+      <div className={css(styles.formRow)}>
+        <label className={css(styles.label)}>Когда заканчивается платежный срок?</label>
+        <Field component={DateInput}
+               icon={require('../assets/img/icon-calendar.png')}
+               name='creditStopDate' />
       </div>
       <Button onClick={handleSubmit} active={valid}>Продолжить</Button>
     </form>

@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     lineHeight: '38px',
   },
   disabled: {
-    backgroundColor: colors.grey,
+    backgroundColor: 'rgb(140, 139, 139)',
     cursor: 'not-allowed',
   },
   red: {

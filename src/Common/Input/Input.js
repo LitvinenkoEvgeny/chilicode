@@ -7,23 +7,37 @@ import VMasker from 'vanilla-masker';
 
 class Input extends Component {
   componentDidMount() {
-    if(this.props.mask){
+    if (this.props.mask) {
+      console.log(this.input);
       VMasker(this.input).maskPattern(this.props.mask);
     }
   }
 
   render() {
+    const {
+      input,
+      label,
+      type,
+      meta: {touched, error, warning}
+    } = this.props;
     return (
-      <input type="text"
-             ref={input => this.input}
-             {...this.props.input}
-             className={css(styles.input)}/>
+      <div>
+        <input type="text"
+               ref={input => this.input = input}
+               {...this.props.input}
+               placeholder={this.props.placeholder}
+               className={css(
+                 styles.input,
+                 touched && error && styles.error
+               )}/>
+      </div>
     );
   }
 }
 
 Input.propTypes = {
   mask: PropTypes.string,
+  placeholder: PropTypes.string,
 };
 
 const styles = StyleSheet.create({
@@ -31,11 +45,15 @@ const styles = StyleSheet.create({
     width: 307,
     height: 52,
     border: '1px solid #9e9e9e',
+    transition: 'border-color .3s ease-in-out',
     zIndex: 2,
     backgroundColor: '#ffffff',
     ':focus': {
       outline: 'none'
     }
+  },
+  error: {
+    borderColor: '#f00'
   }
 });
 

@@ -9,7 +9,7 @@ class DoubleRadio extends Component {
     super(...arguments);
 
     this.state = {
-      checked: 'Муж',
+      checked: this.props.defaultValue || '',
     };
 
     this.handleCheckBoxClick = this.handleCheckBoxClick.bind(this);
@@ -80,6 +80,7 @@ DoubleRadio.propTypes = {
     first: PropTypes.PropTypes.string.isRequired,
     second: PropTypes.PropTypes.string.isRequired,
   }).isRequired,
+  defaultValue: PropTypes.string,
 };
 
 const slideRight = {
