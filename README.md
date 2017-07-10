@@ -3,9 +3,7 @@
 
 ## Развертывание на локалке:
 `
-git clone https://github.com/LitvinenkoEvgeny/chilicode && cd chilicode
-npm install 
-npm run dev
+git clone https://github.com/LitvinenkoEvgeny/chilicode && cd chilicode && npm install && npm run dev
 `
 ### возможные фичи:
 - доведение до ума анимаций, в формах
