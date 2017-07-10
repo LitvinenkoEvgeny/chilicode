@@ -11,7 +11,7 @@ module.exports = function(env) {
     output: {
       path: path.resolve(__dirname, 'client', 'assets'),
       filename: 'bundle.js',
-      publicPath: "/assets/",
+      publicPath: "assets/",
       pathinfo: true
     },
 
