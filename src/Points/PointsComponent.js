@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {css, StyleSheet} from 'aphrodite';
+import {css, StyleSheet} from 'aphrodite/no-important';
 
 
 class PointsComponent extends Component {
@@ -36,7 +36,7 @@ class PointsComponent extends Component {
     let i = 1;
     let pointsList = [];
 
-    while (i !== this.props.size) {
+    while (i < this.props.size + 1) {
       const className = css(
         styles.point,
         i === this.props.now && styles.active
@@ -46,7 +46,7 @@ class PointsComponent extends Component {
         <div key={i} className={className}/>
       );
 
-      i++;
+      i += 1;
     }
 
     return pointsList;
@@ -74,6 +74,9 @@ PointsComponent.propTypes = {
 
 const styles = StyleSheet.create({
   pointsContainer: {
+    position: 'absolute',
+    left: 5,
+    top: '30%',
     display: 'flex',
     flexDirection: 'column',
     transform: 'translate(-1110%, 0)',

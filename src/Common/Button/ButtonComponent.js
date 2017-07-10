@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, css} from 'aphrodite';
+import {StyleSheet, css} from 'aphrodite/no-important';
 import fonts from '../../styles/fonts';
 import colors from '../../styles/colors';
 
@@ -10,7 +10,7 @@ const Button = ({active, children, ...props}) => {
     styles.button,
     active? styles.red : styles.disabled
   );
-  return <button className={className} {...props}><span>{children}</span></button>
+  return <button className={className} {...props}><span className={css(styles.text)}>{children}</span></button>
 };
 
 Button.propTypes = {
@@ -20,7 +20,6 @@ Button.propTypes = {
 
 const styles = StyleSheet.create({
   button: {
-    width: 144,
     height: 38,
     border: '0',
     outline: 'none',
@@ -30,7 +29,9 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontWeight: 'bold',
     textTransform: 'uppercase',
-    display: 'flex',
+    display: 'block',
+    padding: '15px 35px',
+    lineHeight: '4px',
     justifyContent: 'center',
     alignItems: 'center',
     marginLeft: 'auto',
@@ -39,7 +40,6 @@ const styles = StyleSheet.create({
     marginBottom: 0,
     cursor: 'pointer',
     transition: 'background-color .3s ease-in-out',
-    lineHeight: '38px',
   },
   disabled: {
     backgroundColor: 'rgb(140, 139, 139)',
@@ -51,6 +51,8 @@ const styles = StyleSheet.create({
       backgroundColor: '#ad1515',
     }
   },
+  text: {
+  }
 });
 
 export default Button;

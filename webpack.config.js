@@ -41,7 +41,7 @@ module.exports = function(env) {
             }
           ]
         }, {
-          test: /\.(ttf|png)/,
+          test: /\.(ttf|png|jpg)/,
           use: ['file-loader']
         }
       ]

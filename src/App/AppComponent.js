@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, css} from 'aphrodite';
+import {StyleSheet, css} from 'aphrodite/no-important';
 import PropTypes from 'prop-types';
 import 'normalize.css';
 
@@ -18,9 +18,10 @@ AppComponent.propTypes = {
   visibility: PropTypes.object.isRequired,
 };
 
+const bg1 = require('../assets/img/monitor1bg.jpg');
 const styles = StyleSheet.create({
   container: {
-    backgroundImage: `url(${require('file-loader!../assets/img/monitor1bg.jpg')})`,
+    backgroundImage: `url(${bg1})`,
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
     display: 'flex',

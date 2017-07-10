@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Slider from 'react-rangeslider';
 import 'react-rangeslider/lib/index.css'
-import {StyleSheet, css} from 'aphrodite';
+import {StyleSheet, css} from 'aphrodite/no-important';
 
 import './rangeSlider.custom.sass';
 import fonts from '../styles/fonts';
@@ -43,7 +43,7 @@ class RangeSliderComponent extends Component {
   render() {
 
     return (
-      <div>
+      <div className={css(styles.container)}>
         <span className={css(styles.value)}>{this.formatLabel(this.state.value)}</span>
 
         <div className={css(styles.sliderWrapper)} onWheel={this.handleMouseWheel}>
@@ -78,6 +78,9 @@ RangeSliderComponent.propTypes = {
 };
 
 const styles = StyleSheet.create({
+  container: {
+    marginBottom: 50,
+  },
   value: {
     color: '#ffffff',
     fontFamily: [fonts.PFDinDisplayPro],

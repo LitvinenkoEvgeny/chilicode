@@ -1,4 +1,5 @@
 const AGREE = 'AGREE';
+const DISAGREE = 'DISAGREE';
 const CALCULATE = 'CALCULATE';
 
 const initialState = {
@@ -19,6 +20,9 @@ export default function (state = initialState, action = {}) {
         return {...state};
       }
 
+    case DISAGREE:
+      return {...state, agree: false, showRight: false};
+
     default:
       return {...state};
   }
@@ -27,6 +31,12 @@ export default function (state = initialState, action = {}) {
 export function agree() {
   return {
     type: AGREE
+  }
+}
+
+export function disagree(){
+  return {
+    type: DISAGREE
   }
 }
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import {css, StyleSheet} from 'aphrodite';
+import {css, StyleSheet} from 'aphrodite/no-important';
 import {Field, reduxForm} from 'redux-form'
 
 
@@ -13,7 +13,7 @@ import Button from '../Common/Button/ButtonComponent';
 import * as validateFuncs from './validation-functions';
 
 const FirstForm = props => {
-  const {handleSubmit, pristine, reset, submitting, valid} = props;
+  const {handleSubmit, warn, valid} = props;
   return (
     <form onSubmit={handleSubmit} className={css(styles.form)}>
       <div className={css(styles.formRow)}>
@@ -27,7 +27,7 @@ const FirstForm = props => {
       <div className={css(styles.formRow)}>
         <label className={css(styles.label)}>ФИО</label>
         <Field component={Input}
-               validate={[validateFuncs.required]}
+               validate={[validateFuncs.required, validateFuncs.minLength(15)]}
                name='fullName' />
       </div>
       <div className={css(styles.formRow)}>
@@ -47,8 +47,8 @@ const FirstForm = props => {
         <label className={css(styles.label)}>Мобильный телефон</label>
         <Field component={Input}
                mask={'9 (999) 999 99 99'}
-               validate={[validateFuncs.phoneNumber]}
                placeholder='8 (902) 222 13 20'
+               validate={[validateFuncs.phoneNumber]}
                name='phone' />
       </div>
       <div className={css(styles.formRow)}>
@@ -58,7 +58,7 @@ const FirstForm = props => {
                placeholder="yourawesomemail@gmail.com"
                name='mail' />
       </div>
-      <Button onClick={handleSubmit} active={valid}>Продолжить</Button>
+      <Button onClick={handleSubmit} active={valid && !warn}>Продолжить</Button>
     </form>
   )
 };
@@ -87,6 +87,7 @@ const styles = StyleSheet.create({
 const validate = values => {
   const errors = {};
 
+
   return errors;
 };
 
@@ -94,5 +95,5 @@ export default reduxForm({
   form: 'simple', // a unique identifier for this form
   destroyOnUnmount: false, // <------ preserve form data
   forceUnregisterOnUnmount: true, // <------ unregister fields on unmount
-  validate
+  validate,
 })(FirstForm)

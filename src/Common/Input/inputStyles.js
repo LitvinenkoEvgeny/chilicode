@@ -10,6 +10,8 @@ export default StyleSheet.create({
   },
   input: {
     width: 307,
+    padding: 20,
+    boxSizing: 'border-box',
     border: 0,
     zIndex: 2,
     backgroundColor: '#ffffff',

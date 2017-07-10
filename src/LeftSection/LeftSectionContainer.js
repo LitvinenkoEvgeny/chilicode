@@ -11,15 +11,10 @@ class LeftSectionContainer extends Component {
   constructor(){
     super(...arguments);
 
-    this.state = {
-      step: 1
-    };
-
     this.nextStep = this.nextStep.bind(this);
   }
 
   nextStep() {
-    this.setState({step: ++this.state.step});
     this.props.calculate();
     this.props.goToNext();
   }
@@ -28,9 +23,9 @@ class LeftSectionContainer extends Component {
     return (
       <LeftSectionComponent isAgree={this.props.isAgree}
                             setAgree={this.props.agree}
-                            nowStep={this.state.step}
+                            nowStep={this.props.nowStep}
+                            steps={this.props.steps}
                             calculate={this.nextStep}
-                            stepName={this.props.stepName}
                             />
     );
   }
@@ -38,7 +33,8 @@ class LeftSectionContainer extends Component {
 
 LeftSectionContainer.propTypes = {
   isAgree: PropTypes.bool.isRequired,
-  stepName: PropTypes.string.isRequired,
+  nowStep: PropTypes.number.isRequired,
+  steps: PropTypes.number.isRequired,
   calculate: PropTypes.func.isRequired,
   agree: PropTypes.func.isRequired,
   goToNext: PropTypes.func.isRequired,
@@ -46,7 +42,8 @@ LeftSectionContainer.propTypes = {
 
 const mapStateToProps = state => ({
   isAgree: state.visibility.agree,
-  stepName: state.steps.now
+  nowStep: state.steps.now,
+  steps: state.steps.steps,
 });
 
 const mapDispatchToProps = dispatch => ({

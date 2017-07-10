@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {css, StyleSheet} from 'aphrodite';
+import {css, StyleSheet} from 'aphrodite/no-important';
 
 import {isChildren} from '../../Utils/domHelpers';
 import * as fonts from '../../styles/fonts';
@@ -152,6 +152,8 @@ const styles = StyleSheet.create({
   },
   input: {
     width: 307,
+    padding: 20,
+    boxSizing: 'border-box',
     border: 0,
     zIndex: 2,
     backgroundColor: '#ffffff',

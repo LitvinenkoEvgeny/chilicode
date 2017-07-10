@@ -1,22 +1,22 @@
 const NEXT_STEP = 'NEXT_STEP';
 const PREV_STEP = 'PREV_STEP';
+const SET_STEP = 'SET_STEP';
 
 const initialState = {
-  now: 'agree',
-  steps: ['agree', 'common', 'place', 'data', 'work']
+  now: 1,
+  steps: 5
 };
 
 export default function reducer(state = initialState, action = {}){
   switch(action.type){
     case NEXT_STEP:
-      const nowIndex = state.steps.indexOf(state.now);
-      let nextIndex = nowIndex + 1;
+      return {...state, now: state.now + 1};
 
-      if(nextIndex === state.steps.length){
-        nextIndex = state.steps.length;
-      }
+    case PREV_STEP:
+      return {...state, now: state.now - 1};
 
-      return {...state, now: state.steps[nextIndex]};
+    case SET_STEP:
+      return {...state, now: action.payload};
 
 
     default: return {...state};
@@ -26,6 +26,13 @@ export default function reducer(state = initialState, action = {}){
 export function nextStep(){
   return {
     type: NEXT_STEP
+  }
+}
+
+export function setStep(step){
+  return {
+    type: SET_STEP,
+    payload: step
   }
 }
 

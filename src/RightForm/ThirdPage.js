@@ -1,5 +1,5 @@
 import React from 'react'
-import {css, StyleSheet} from 'aphrodite';
+import {css, StyleSheet} from 'aphrodite/no-important';
 import {Field, reduxForm} from 'redux-form'
 
 
@@ -11,66 +11,70 @@ import Button from '../Common/Button/ButtonComponent';
 
 import * as validateFuncs from './validation-functions';
 
-const SecondForm = props => {
-  const {handleSubmit, pristine, reset, submitting, valid} = props;
+const ThirdForm = props => {
+  const {handleSubmit, formValues, valid} = props;
   return (
     <form onSubmit={handleSubmit} className={css(styles.form)}>
       <div className={css(styles.formRow)}>
         <label className={css(styles.label)}>Серия, номер паспорта</label>
         <Field component={Input}
                validate={[validateFuncs.required]}
-               name='passportNumber' />
+               name='passportNumber'/>
       </div>
 
       <div className={css(styles.formRow)}>
         <label className={css(styles.label)}>Дата выдачи</label>
         <Field component={DateInput}
                icon={require('../assets/img/icon-calendar.png')}
-               name='passportDate' />
+               name='passportDate'/>
       </div>
       <div className={css(styles.formRow)}>
         <label className={css(styles.label)}>Кем выдан паспорт</label>
         <Field component={Input}
-               name='passportWhoGive' />
+               name='passportWhoGive'/>
       </div>
       <div className={css(styles.formRow)}>
         <label className={css(styles.label)}>Код подразделения выдачи паспорта</label>
         <Field component={Input}
                type='text'
-               name='passportCode' />
+               name='passportCode'/>
       </div>
       <div className={css(styles.formRow)}>
         <label className={css(styles.label)}>Место рождения</label>
         <Field component={Input}
                type='text'
-               name='bithPlace' />
+               name='bithPlace'/>
       </div>
       <div className={css(styles.formRow)}>
         <label className={css(styles.label)}>Есть займы в других кредитных<br/>организациях?</label>
         <Field component={DoubleRadio}
                defaultValue="Да"
                values={{first: 'Да', second: 'Нет'}}
-               name='hasCredits' />
+               name='hasCredits'/>
       </div>
       <div className={css(styles.formRow)}>
         <label className={css(styles.label)}>Имеются просрочки по платежам?</label>
         <Field component={DoubleRadio}
                defaultValue="Нет"
                values={{first: 'Да', second: 'Нет'}}
-               name='hasFailCredits' />
+               name='hasFailCredits'/>
       </div>
-      <div className={css(styles.formRow)}>
-        <label className={css(styles.label)}>Общая сумма задолженности</label>
-        <Field component={Input}
-               type='text'
-               name='creditSum' />
-      </div>
-      <div className={css(styles.formRow)}>
-        <label className={css(styles.label)}>Когда заканчивается платежный срок?</label>
-        <Field component={DateInput}
-               icon={require('../assets/img/icon-calendar.png')}
-               name='creditStopDate' />
-      </div>
+      {formValues && formValues.hasFailCredits === 'Да' &&
+          <div className={css(styles.formRow)}>
+            <label className={css(styles.label)}>Общая сумма задолженности</label>
+            <Field component={Input}
+                   type='text'
+                   name='creditSum'/>
+          </div>
+      }
+      {formValues && formValues.hasFailCredits === 'Да' &&
+          <div className={css(styles.formRow)}>
+            <label className={css(styles.label)}>Когда заканчивается платежный срок?</label>
+            <Field component={DateInput}
+                   icon={require('../assets/img/icon-calendar.png')}
+                   name='creditStopDate'/>
+          </div>
+      }
       <Button onClick={handleSubmit} active={valid}>Продолжить</Button>
     </form>
   )
@@ -106,6 +110,6 @@ const validate = values => {
 export default reduxForm({
   form: 'simple', // a unique identifier for this form
   destroyOnUnmount: false, // <------ preserve form data
-  forceUnregisterOnUnmount: true, // <------ unregister fields on unmount
+  forceUnregisterOnUnmount: true, // <------ unregister fields on unmount,
   validate
-})(SecondForm)
+})(ThirdForm)

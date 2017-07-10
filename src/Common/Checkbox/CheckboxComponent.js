@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {StyleSheet, css} from 'aphrodite';
+import {StyleSheet, css} from 'aphrodite/no-important';
 import fonts from '../../styles/fonts';
 
 import * as colors from '../../styles/colors';
@@ -17,7 +17,11 @@ class CheckboxComponent extends Component {
 
   handleClick(){
     this.setState({agree: !this.state.agree});
-    this.props.onAgree();
+    if(this.state.agree){
+      this.props.onDisAgree();
+    } else {
+      this.props.onAgree();
+    }
   }
 
   render() {
@@ -51,6 +55,7 @@ const styles = StyleSheet.create({
     cursor: 'pointer',
     transition: 'background-color .3s ease-in-out',
     display: 'inline-block',
+    marginBottom: 50
   },
   checkboxOn: {
     backgroundColor: '#6caf2a',

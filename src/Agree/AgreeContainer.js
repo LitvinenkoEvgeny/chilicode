@@ -10,6 +10,7 @@ class AgreeContainer extends Component {
   render() {
     return (
       <AgreeComponent onAgree={this.props.onAgree}
+                      onDisAgree={this.props.onDisAgree}
                       isAgree={this.props.isAgree}
                       calculate={this.props.calculate} />
     );
@@ -19,6 +20,7 @@ class AgreeContainer extends Component {
 AgreeContainer.propTypes = {
   isAgree: PropTypes.bool.isRequired,
   onAgree: PropTypes.func.isRequired,
+  onDisAgree: PropTypes.func.isRequired,
   calculate: PropTypes.func.isRequired,
 };
 
@@ -27,7 +29,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onAgree: bindActionCreators(actionCreators.agree, dispatch)
+  onAgree: bindActionCreators(actionCreators.agree, dispatch),
+  onDisAgree: bindActionCreators(actionCreators.disagree, dispatch)
 });
 
 

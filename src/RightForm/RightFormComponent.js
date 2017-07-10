@@ -5,21 +5,19 @@ import {css, StyleSheet} from 'aphrodite/no-important';
 import FirstPage from './FirstPage';
 import SecondPage from './SecondPage';
 import ThirdPage from './ThirdPage';
+import FourthPage from './FourthPage';
+import Steps from '../Steps/StepsComponent';
 
 class RightFormComponent extends Component {
   constructor(){
     super(...arguments);
 
 
-    this.state = {
-      page: 1
-    };
-
     this.nextPage = this.nextPage.bind(this);
   }
 
   nextPage(){
-    this.setState({page: this.state.page + 1});
+    this.props.nextStep();
   }
 
   prevPage(){
@@ -27,25 +25,25 @@ class RightFormComponent extends Component {
   }
 
   render() {
-    const {page} = this.state;
+    const step = this.props.nowStep;
     return (
       <div>
-        {page === 1 && <FirstPage onSubmit={this.nextPage}/>}
-        {page === 2 && <SecondPage onSubmit={this.nextPage}/>}
-        {page === 3 && <ThirdPage onSubmit={this.nextPage}/>}
+        <Steps now={this.props.nowStep} size={4} />
+        {step === 2 && <FirstPage onSubmit={this.nextPage}/>}
+        {step === 3 && <SecondPage onSubmit={this.nextPage}/>}
+        {step === 4 && <ThirdPage formValues={this.props.formValues} onSubmit={this.nextPage}/>}
+        {step === 5 && <FourthPage onSubmit={(data) => console.log(data)}/>}
       </div>
     );
   }
 }
 
-RightFormComponent.propTypes = {};
-RightFormComponent.defaultProps = {};
-
-const styles = StyleSheet.create({
-  formContainer: {
-
-  }
-});
+RightFormComponent.propTypes = {
+  nowStep: PropTypes.number.isRequired,
+  steps: PropTypes.number.isRequired,
+  nextStep: PropTypes.func.isRequired,
+  formValues: PropTypes.object,
+};
 
 export default RightFormComponent;
 

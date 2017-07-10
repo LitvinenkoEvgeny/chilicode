@@ -10,46 +10,57 @@ import Button from '../Common/Button/ButtonComponent';
 
 import * as validateFuncs from './validation-functions';
 
-const SecondForm = props => {
-  const {handleSubmit, pristine, reset, submitting, valid} = props;
+const FourthPage = props => {
+  const {handleSubmit, onSubmit, pristine, reset, submitting, valid} = props;
   return (
     <form onSubmit={handleSubmit} className={css(styles.form)}>
       <div className={css(styles.formRow)}>
-        <label className={css(styles.label)}>Регион (край,область) проживания</label>
-        <Field component={Input}
-               validate={[validateFuncs.required]}
-               name='region' />
+        <label className={css(styles.label)}>Вы трудоустроены?</label>
+        <Field component={DoubleRadio}
+               defaultValue="Нет"
+               values={{first: 'Да', second: 'Нет'}}
+               name='hasWork' />
       </div>
 
       <div className={css(styles.formRow)}>
-        <label className={css(styles.label)}>Город проживания</label>
+        <label className={css(styles.label)}>Город, адрес работы</label>
         <Field component={Input}
-               name='city' />
+               name='workAddress' />
       </div>
+
       <div className={css(styles.formRow)}>
-        <label className={css(styles.label)}>Улица места проживания</label>
+        <label className={css(styles.label)}>Название организации</label>
         <Field component={Input}
-               name='street' />
+               name='organizationName' />
       </div>
+
       <div className={css(styles.formRow)}>
-        <label className={css(styles.label)}>Номер дома</label>
+        <label className={css(styles.label)}>Трудовой стаж на последнем<br/>месте работы (в месяцах)</label>
         <Field component={Input}
-               type='text'
-               name='houseNumber' />
+               name='howLongWork' />
       </div>
+
       <div className={css(styles.formRow)}>
-        <label className={css(styles.label)}>Номер квартиры</label>
+        <label className={css(styles.label)}>Полный ежемесячный доход<br/>(в рублях)</label>
         <Field component={Input}
-               type='text'
-               name='flatNumber' />
+               name='salary' />
       </div>
+
       <div className={css(styles.formRow)}>
-        <label className={css(styles.label)}>Место регистрации совпадает<br/>с местом проживания? </label>
-        <Field component={DoubleRadio}
-               defaultValue="Да"
-               values={{first: 'Да', second: 'Нет'}}
-               name='sex' />
+        <label className={css(styles.label)}>Должность</label>
+        <Field component={Input}
+               name='workPosition' />
       </div>
+
+      <div className={css(styles.formRow)}>
+        <label className={css(styles.label)}>Рабочий телефон</label>
+        <Field component={Input}
+               mask={'9 (999) 999 99 99'}
+               placeholder='8 (902) 222 13 20'
+               validate={[validateFuncs.required, validateFuncs.phoneNumber]}
+               name='workPhone' />
+      </div>
+
       <Button onClick={handleSubmit} active={valid}>Продолжить</Button>
     </form>
   )
@@ -87,4 +98,4 @@ export default reduxForm({
   destroyOnUnmount: false, // <------ preserve form data
   forceUnregisterOnUnmount: true, // <------ unregister fields on unmount
   validate
-})(SecondForm)
+})(FourthPage)
